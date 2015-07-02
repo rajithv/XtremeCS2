@@ -34,11 +34,13 @@ int main(){
 	int greedy = pay_greedy(M, denoms);
 	cout << "Greedy : " << greedy  << endl;
 	
-	int rec1 = pay_rec(M, denoms);
-	cout << "Rec1 : " << rec1 << " " << no_of_calls_rec1 << endl;
 	
 	int dp = pay_dp(M, denoms);
 	cout << "DP : " << dp << " " << no_of_calls_dp << endl;
+	
+	int rec1 = pay_rec(M, denoms);
+	cout << "Rec1 : " << rec1 << " " << no_of_calls_rec1 << endl;
+	
 	
 	return 0;
 }
@@ -76,8 +78,8 @@ int pay_rec(int M, vector<int> denoms){
 	for(int i=0; i<denoms.size(); i++){
 		
 		if(denoms[i] <= M){
-			num = M / denoms[i];
-			best = min(best, num + pay_rec(M % denoms[i], denoms));
+			//num = M / denoms[i];
+			best = min(best, 1 + pay_rec(M - denoms[i], denoms));
 		}
 		
 	}
@@ -103,8 +105,8 @@ int pay_dp(int M, vector<int> denoms){
 	for(int i=0; i<denoms.size(); i++){
 		
 		if(denoms[i] <= M){
-			num = M / denoms[i];
-			best = min(best, num + pay_dp(M % denoms[i], denoms));
+			//num = M / denoms[i];
+			best = min(best, 1 + pay_dp(M - denoms[i], denoms));
 		}
 		
 	}
